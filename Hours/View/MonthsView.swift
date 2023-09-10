@@ -20,33 +20,49 @@ struct MonthsView: View {
     }
     
     var body: some View {
-        VStack(alignment: .trailing) {
-            HStack(spacing: 90) {
-                Text("Today, \(dateFormater.string(from: date))")
-                Button(action: {
-                    withAnimation(Animation.spring()) {
-                        self.addMonth.toggle()
-                    }
-                }, label: {
-                    Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
-                })
-            }.padding(15)
+        NavigationView {
             List {
-                ForEach(vm.months) { month in
-                  NavigationLink(destination: { HoursView(month: month, vm: vm) }, label: {
-                      HStack(spacing:15) {
-                          Text(month.title ?? "NO TITLE")
-                          Spacer()
-                          Text("total hours:")
-                              .font(.caption2)
-                              .foregroundColor(.gray.opacity(0.7))
-                          Text(String(format: "%.2f", vm.hoursCounter(month: month)))
-                      }
-                  })
-                }.onDelete(perform: vm.deleteMonth)
+                Section("Months") {
+                    ForEach(vm.months) { month in
+                        NavigationLink(destination: { HoursView(month: month, vm: vm) }, label: {
+                            HStack(spacing:15) {
+                                Text(month.title ?? "NO TITLE")
+                                Spacer()
+                                Text("total hours:")
+                                    .font(.caption2)
+                                    .foregroundColor(.gray.opacity(0.7))
+                                Text(String(format: "%.2f", vm.hoursCounter(month: month)))
+                            }
+                        })
+                    }.onDelete(perform: vm.deleteMonth)
+                }
+            }.overlay(alignment: .center, content: {
+                if vm.months.isEmpty {
+                    VStack{
+                        Image(systemName: "list.bullet")
+                            .padding()
+                            .font(.title)
+                        Text("The list is empty")
+                            .padding()
+                            .font(.title)
+                    }
+                }
+            })
+            .sheet(isPresented: $addMonth, content: { AddMonths(vm: vm).presentationDetents([.fraction(0.2)], selection: $addMonthDetents)})
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        withAnimation(Animation.spring()) {
+                            self.addMonth.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                    })
+                }
             }
-        }.sheet(isPresented: $addMonth, content: { AddMonths(vm: vm).presentationDetents([.medium, .fraction(0.2)], selection: $addMonthDetents)})
+            .navigationTitle("\(dateFormater.string(from: date))")
+        }
     }
 }
 
@@ -63,6 +79,8 @@ struct AddMonths: View {
     @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
+            Text("Add month:")
+                .font(.title3)
             HStack {
                 TextField("Month", text: $textFieldText)
                     .padding()

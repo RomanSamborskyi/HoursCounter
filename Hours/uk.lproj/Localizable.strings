@@ -1,0 +1,32 @@
+//Content view
+"Months" = "Місяці";
+"Profile" = "Профіль";
+
+//Monts view
+
+"Today, " = "Сьогодні, ";
+"total hours:" = "загально годин:";
+"The list is empty" = "Список порожній";
+"Add month:" = "Додати місяць:";
+"Month" = "Місяць";
+"Add" = "Додати";
+
+
+//Hours view
+
+"Total salary:" = "Загальна виплата";
+"Total hours:" = "Загально годин";
+"Hours" = "Год.";
+"Minutes" = "Хв.";
+"The list is empty" = "Список порожній";
+"Date in the future!" = "Цей день ще не настав!";
+
+//Profile view
+
+"Enter name" = "Ім'я";
+"Save" = "Зберегти";
+"Edit" = "Ред.";
+"Enter value" = "Введіть значення";
+"Hour salary: " = "Ставка за годину: ";
+"User name" = "Ім'я користувача";
+"Hour salary" = "Ставка за годину";

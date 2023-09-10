@@ -11,9 +11,7 @@ import SwiftUI
 struct HoursApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView {
                 ContentView()
-            }
         }
     }
 }

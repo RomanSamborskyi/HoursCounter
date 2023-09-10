@@ -15,8 +15,9 @@ struct ProfileView: View {
     @State private var userNameTextField: String = ""
     @AppStorage("editUserName") var editUserName: Bool = false
     var body: some View {
+        NavigationView {
             List {
-                Section {
+                Section("User name") {
                     if  !editUserName {
                         HStack {
                             TextField("Enter name", text: $userNameTextField)
@@ -31,7 +32,7 @@ struct ProfileView: View {
                                 Text("Save")
                                     .padding(5)
                                     .foregroundColor(.blue)
-                                    .frame(width: 50,height: 30)
+                                    .frame(width: 90,height: 30)
                             })
                         }
                     } else {
@@ -47,11 +48,12 @@ struct ProfileView: View {
                                 Text("Edit")
                                     .padding(5)
                                     .foregroundColor(.blue)
-                                    .frame(width: 50,height: 30)
+                                    .frame(width: 75,height: 30)
                             })
                         }
                     }
                 }
+                Section("Hour salary") {
                 if salaryPerHour == 0 {
                     HStack {
                         TextField("Enter value", text: $hourSalaryTextFieald)
@@ -63,15 +65,15 @@ struct ProfileView: View {
                                 self.salaryPerHour = Int(hourSalaryTextFieald) ?? 0
                             }
                         }, label: {
-                                Text("Save")
+                            Text("Save")
                                 .padding(5)
                                 .foregroundColor(.blue)
-                                .frame(width: 50,height: 30)
+                                .frame(width: 90,height: 30)
                         })
                     }
                 } else {
                     HStack {
-                        Text("Hour salary: \(salaryPerHour)")
+                        Text(" \(salaryPerHour)")
                         Spacer()
                         Button(action: {
                             self.salaryPerHour = 0
@@ -79,11 +81,13 @@ struct ProfileView: View {
                             Text("Edit")
                                 .padding(5)
                                 .foregroundColor(.blue)
-                                .frame(width: 50,height: 30)
+                                .frame(width: 75,height: 30)
                         })
                     }
                 }
-            }
+             }
+            }.navigationTitle("Profile")
+        }
     }
 }
 

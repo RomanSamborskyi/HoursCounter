@@ -19,6 +19,9 @@ struct HoursView: View {
     @State private var hours: String = ""
     @State private var minutes: String = ""
     @State private var showDetails: Bool = false
+    @State private var dateError: Bool = false
+    @State private var date: Date = Date()
+    @FocusState var isFocused
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -59,33 +62,43 @@ struct HoursView: View {
                 HStack {
                     TextField("Hours", text: $hours)
                         .padding()
-                        .frame(maxWidth: .infinity)
+                        .frame(width: 80,height: 50)
                         .background(Color.gray.opacity(0.4))
                         .cornerRadius(10)
+                        .keyboardType(.numberPad)
+                        .focused($isFocused)
                     TextField("Minutes", text: $minutes)
                         .padding()
-                        .frame(maxWidth: .infinity)
+                        .frame(width: 80,height: 50)
                         .background(Color.gray.opacity(0.4))
                         .cornerRadius(10)
+                        .keyboardType(.numberPad)
+                        .focused($isFocused)
+                    DatePicker("", selection: $date, displayedComponents: .date)
                 }.padding(.horizontal)
                 Button(action: {
                     withAnimation(Animation.spring()) {
-                        vm.addHours(hours: Int64(hours) ?? 0, minutes: Int64(minutes) ?? 0, month: month)
-                        hours = ""
-                        minutes = ""
+                        if !(date > Date()) {
+                            vm.addHours(hours: Int64(hours) ?? 0, minutes: Int64(minutes) ?? 0, date: date, month: month)
+                            hours = ""
+                            minutes = ""
+                            date = Date()
+                            isFocused = false
+                        } else {
+                            self.dateError = true
+                        }
                     }
                 }, label: {
-                    HStack {
-                        Text("Save")
-                            .foregroundColor(.white)
-                        Image(systemName: "plus.app")
-                            .foregroundColor(.white)
-                    }.padding()
+                    Image(systemName: "plus.app")
+                        .foregroundColor(.white)
+                        .padding()
                         .frame(maxWidth: .infinity)
-                        .background(hours.isEmpty ? Color.blue.opacity(0.5) : Color.blue)
+                        .frame(height: 50)
+                        .background(hours.isEmpty || date >= Date() ? Color.blue.opacity(0.5) : Color.blue)
                         .cornerRadius(10)
-                }).padding()
-                    .disabled(hours.isEmpty)
+                })
+                .disabled(hours.isEmpty)
+                .padding()
             }
             List {
                 ForEach(vm.getHours(month: month)){ hours in
@@ -98,8 +111,24 @@ struct HoursView: View {
                     vm.deleteHours(indexSet: indexSet, month: month)
                 }
             }.listStyle(.plain)
+                .overlay(alignment: .center, content: {
+                    if let array = month.hours?.allObjects as? [HoursEntity] {
+                        if array.isEmpty {
+                            VStack {
+                                Image(systemName: "list.bullet")
+                                    .padding()
+                                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                                Text("The list is empty")
+                                    .padding()
+                                    .font(.system(size: 30, weight: .medium, design: .rounded))
+                            }.task { self.showDetails = true }
+                        }
+                    }
+                })
         }.padding()
-            .padding(.top, -25)
+            .padding(.top, -40)
+            .alert("Date in the future!", isPresented: $dateError, actions: { Text("") })
+            
     }
 }
 

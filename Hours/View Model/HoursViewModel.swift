@@ -77,11 +77,11 @@ class HoursViewModel: ObservableObject {
         save()
     }
     
-    func addHours(hours: Int64, minutes: Int64, month: MonthEntity) {
+    func addHours(hours: Int64, minutes: Int64, date: Date, month: MonthEntity) {
         let newData = HoursEntity(context: coreData.context)
         newData.hours = hours
         newData.minutes = minutes
-        newData.date = Date()
+        newData.date = date
         newData.month = month
         save()
     }
@@ -123,3 +123,4 @@ class HoursViewModel: ObservableObject {
         }
     }
 }
+ 
