@@ -15,7 +15,6 @@ class HoursViewModel: ObservableObject {
     
     @Published var months: [MonthEntity] = []
     
-    
     init() {
         getMonths()
     }
@@ -93,9 +92,9 @@ class HoursViewModel: ObservableObject {
         save()
     }
     
-    func deleteHours(indexSet: IndexSet, month: MonthEntity) {
-        guard let index = indexSet.first else { return }
+    func deleteHours(month: MonthEntity, hour: HoursEntity) {
         guard let arrayOfHours = month.hours?.allObjects as? [HoursEntity] else { return }
+        guard let index = arrayOfHours.firstIndex(of: hour) else { return }
         let deletedItem = arrayOfHours[index]
         coreData.context.delete(deletedItem)
         save()

@@ -106,9 +106,11 @@ struct HoursView: View {
                         Text(dateFormater.string(from: hours.date ?? Date()))
                         Spacer()
                         Text("\(hours.hours).\(hours.minutes)")
+                    }.contextMenu {
+                        Button(role: .destructive, action: { vm.deleteHours(month: month, hour: hours) }, label: {
+                            Label("Delete", systemImage: "trash")
+                        })
                     }
-                }.onDelete { indexSet in
-                    vm.deleteHours(indexSet: indexSet, month: month)
                 }
             }.listStyle(.plain)
                 .overlay(alignment: .center, content: {
@@ -128,7 +130,6 @@ struct HoursView: View {
         }.padding()
             .padding(.top, -40)
             .alert("Date in the future!", isPresented: $dateError, actions: { Text("") })
-            
     }
 }
 
