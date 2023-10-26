@@ -21,6 +21,10 @@
 "The list is empty" = "Список порожній";
 "Date in the future!" = "Цей день ще не настав!";
 "Delete" = "Видалити";
+"Start work at:" = "Початок роботи:";
+"End work at:" = "Кінець роботи:";
+"Pause time:" = "Час обіду:";
+"Date:" = "Дата:";
 
 //Profile view
 

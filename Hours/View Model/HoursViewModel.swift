@@ -22,7 +22,7 @@ class HoursViewModel: ObservableObject {
     func getHours(month: MonthEntity) -> [HoursEntity] {
         
         let request = NSFetchRequest<HoursEntity>(entityName: coreData.hoursEntityName)
-        request.sortDescriptors = [ NSSortDescriptor(keyPath: \HoursEntity.date, ascending: true)]
+        request.sortDescriptors = [ NSSortDescriptor(keyPath: \HoursEntity.date, ascending: false)]
         request.predicate = NSPredicate(format: "month == %@", month)
         
         do {
@@ -111,6 +111,30 @@ class HoursViewModel: ObservableObject {
     
     func returnUserName() -> String {
         return UserDefaults.standard.string(forKey: "userName") ?? "No name"
+    }
+    
+    func countWorkHours(starHours: String, startMinutes: String, endHours: String, endMinutes: String, pause: String, hours: inout String, minutes: inout String) {
+        let startWorkMinutes = ((Int64(starHours) ?? 0) * 60) + (Int64(startMinutes) ?? 0)
+        let endWorkMinutes = ((Int64(endHours) ?? 0) * 60) + (Int64(endMinutes) ?? 0)
+        let totalMinutesPerDay = endWorkMinutes - startWorkMinutes - (Int64(pause) ?? 0)
+        let total = Double(totalMinutesPerDay) / 60
+        let leftSide = Int(total)
+        let rightSide = total - Double(leftSide)
+        var finalMinutes: String = ""
+        
+        switch rightSide {
+        case 0.25:
+            finalMinutes = "15"
+        case 0.50:
+            finalMinutes = "30"
+        case 0.75:
+            finalMinutes = "45"
+        default:
+            finalMinutes = "0"
+        }
+        
+        hours = String(leftSide)
+        minutes = finalMinutes
     }
     
     func save() {

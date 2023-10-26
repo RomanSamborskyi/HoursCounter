@@ -24,7 +24,7 @@ struct MonthsView: View {
             List {
                 Section("Months") {
                     ForEach(vm.months) { month in
-                        NavigationLink(destination: { HoursView(month: month, vm: vm) }, label: {
+                        NavigationLink(destination: { HoursView(month: month, vm: vm, ddMonthDetents: $addMonthDetents) }, label: {
                             HStack(spacing:15) {
                                 Text(month.title ?? "NO TITLE")
                                 Spacer()
