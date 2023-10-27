@@ -23,44 +23,43 @@ struct AddHoursView: View {
     let month: MonthEntity
     
     var body: some View {
-        VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                HStack(spacing: 35) {
-                    Text("Total salary:")
-                        .foregroundColor(.gray.opacity(0.7))
-                        .font(.caption)
-                        .frame(width: 140)
-                    Text(String(format: "%.2f", vm.salaryCounter(month: month)))
-                        .font(.title3)
-                }
-                HStack(spacing: 35) {
-                    Text("Total hours:")
-                        .font(.caption)
-                        .foregroundColor(.gray.opacity(0.7))
-                        .frame(width: 140)
-                    Text(String(format: "%.2f", vm.hoursCounter(month: month)))
-                        .font(.title3)
-                }
-            }.padding(.leading)
-            HStack {
+        VStack {
+            Image(systemName: "box.truck.badge.clock.fill")
+                .font(.system(size: 65))
+                .foregroundStyle(Color.blue)
+            Text("Set working hours:")
+                .padding()
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+            HStack(alignment: .bottom) {
                 Text("Start work at:")
-                    .frame(width: 140)
-                Picker("Hours", selection: $startHours, content: {
-                    ForEach(Hours.allCases) { hour in
-                        Text(hour.description)
-                            .tag(hour.description)
-                    }
-                }).pickerStyle(.menu)
-                Picker("Minutes", selection: $startMinutes, content: {
-                    ForEach(Minutes.allCases) { minute in
-                        Text(minute.description)
-                            .tag(minute.description)
-                    }
-                }).pickerStyle(.menu)
+                    Spacer()
+                VStack {
+                    Text("hour")
+                        .foregroundColor(.gray.opacity(0.7))
+                        .font(.caption2)
+                    Picker("Hours", selection: $startHours, content: {
+                        ForEach(Hours.allCases) { hour in
+                            Text(hour.description)
+                                .tag(hour.description)
+                        }
+                    }).pickerStyle(.menu)
+                }
+                VStack {
+                    Text("minutes")
+                        .foregroundColor(.gray.opacity(0.7))
+                        .font(.caption2)
+                    Picker("Minutes", selection: $startMinutes, content: {
+                        ForEach(Minutes.allCases) { minute in
+                            Text(minute.description)
+                                .tag(minute.description)
+                        }
+                    }).pickerStyle(.menu)
+                }
             }
             HStack {
              Text("End work at:")
-                    .frame(width: 140)
+                   Spacer()
                 Picker("Hours", selection: $endHours, content: {
                     ForEach(Hours.allCases) { hour in
                         Text(hour.description)
@@ -76,7 +75,7 @@ struct AddHoursView: View {
             }
             HStack {
              Text("Pause time:")
-                    .frame(width: 140)
+                   Spacer()
                 Picker("Hours", selection: $pauseTime, content: {
                     ForEach(Pause.allCases) { minute in
                         Text(minute.description)
@@ -86,7 +85,7 @@ struct AddHoursView: View {
             }
             HStack {
                 Text("Date:")
-                       .frame(width: 150)
+                       Spacer()
                 DatePicker("", selection: $date, displayedComponents: .date)
             }
             Button(action: {
@@ -108,7 +107,10 @@ struct AddHoursView: View {
                     }
                 }
             }, label: {
-                Image(systemName: "plus.app")
+                HStack {
+                    Text("SAVE")
+                    Image(systemName: "plus.app")
+                }
                     .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -119,7 +121,6 @@ struct AddHoursView: View {
             .disabled(startHours == .zero)
             .padding()
           Spacer()
-        }.padding()
+        }.padding(25)
     }
 }
-

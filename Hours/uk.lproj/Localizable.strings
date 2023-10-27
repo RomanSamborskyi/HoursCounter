@@ -14,8 +14,8 @@
 
 //Hours view
 
-"Total salary:" = "Загальна виплата";
-"Total hours:" = "Загально годин";
+"Total salary:" = "Загальна виплата:";
+"Total hours:" = "Загально годин:";
 "Hours" = "Год.";
 "Minutes" = "Хв.";
 "The list is empty" = "Список порожній";
@@ -25,7 +25,13 @@
 "End work at:" = "Кінець роботи:";
 "Pause time:" = "Час обіду:";
 "Date:" = "Дата:";
-
+"Count of working days:" = "Відпрацьовано днів:";
+"Current month:" = "Поточний місяць:";
+"Month details" = "Детально за місяць";
+"hour" = "год.";
+"minutes" = "хв.";
+"Set working hours:" = "Задайте робочі години:";
+"SAVE" = "Зберегти";
 //Profile view
 
 "Enter name" = "Ім'я";

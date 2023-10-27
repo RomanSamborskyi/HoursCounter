@@ -18,89 +18,13 @@ struct HoursView: View {
     @ObservedObject var vm: HoursViewModel
     @State private var hours: String = ""
     @State private var minutes: String = ""
-    @State private var showDetails: Bool = false
+    @State private var addHours: Bool = false
+    @State private var showInfo: Bool = false
     @State private var dateError: Bool = false
     @State private var date: Date = Date()
-    @Binding var ddMonthDetents: PresentationDetent
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(spacing: 20) {
-                Text(month.title ?? "")
-                    .font(.title2)
-                
-                Button(action: {
-                    withAnimation(Animation.spring()) {
-                        self.showDetails.toggle()
-                    }
-                }, label: {
-                    Image(systemName: "plus.circle.fill")
-                        .padding()
-                        .font(.title2)
-                        .foregroundColor(Color.blue)
-                        .rotationEffect(Angle(degrees:showDetails ? 90 : 0))
-                        .scaleEffect(showDetails ? 1.12 : 1.0)
-                })
-            }.padding(.leading)
-            
-//                VStack(alignment: .leading) {
-//                    HStack(spacing: 35) {
-//                        Text("Total salary:")
-//                            .foregroundColor(.gray.opacity(0.7))
-//                            .font(.caption)
-//                        Text(String(format: "%.2f", vm.salaryCounter(month: month)))
-//                            .font(.title3)
-//                    }
-//                    HStack(spacing: 35) {
-//                        Text("Total hours:")
-//                            .font(.caption)
-//                            .foregroundColor(.gray.opacity(0.7))
-//                        Text(String(format: "%.2f", vm.hoursCounter(month: month)))
-//                            .font(.title3)
-//                    }
-//                }.padding(.leading)
-//                HStack {
-//                    TextField("Hours", text: $hours)
-//                        .padding()
-//                        .frame(width: 80,height: 50)
-//                        .background(Color.gray.opacity(0.4))
-//                        .cornerRadius(10)
-//                        .keyboardType(.numberPad)
-//                        .focused($isFocused)
-//                    TextField("Minutes", text: $minutes)
-//                        .padding()
-//                        .frame(width: 80,height: 50)
-//                        .background(Color.gray.opacity(0.4))
-//                        .cornerRadius(10)
-//                        .keyboardType(.numberPad)
-//                        .focused($isFocused)
-//                    DatePicker("", selection: $date, displayedComponents: .date)
-//                }.padding(.horizontal)
-//                Button(action: {
-//                    withAnimation(Animation.spring()) {
-//                        if !(date > Date()) {
-//                            vm.addHours(hours: Int64(hours) ?? 0, minutes: Int64(minutes) ?? 0, date: date, month: month)
-//                            hours = ""
-//                            minutes = ""
-//                            date = Date()
-//                            isFocused = false
-//                        } else {
-//                            self.dateError = true
-//                        }
-//                    }
-//                }, label: {
-//                    Image(systemName: "plus.app")
-//                        .foregroundColor(.white)
-//                        .padding()
-//                        .frame(maxWidth: .infinity)
-//                        .frame(height: 50)
-//                        .background(hours.isEmpty || date >= Date() ? Color.blue.opacity(0.5) : Color.blue)
-//                        .cornerRadius(10)
-//                })
-//                .disabled(hours.isEmpty)
-//                .padding()
-                
-            
             List {
                 ForEach(vm.getHours(month: month)){ hours in
                     HStack{
@@ -123,21 +47,47 @@ struct HoursView: View {
                                 Text("The list is empty")
                                     .padding()
                                     .font(.system(size: 30, weight: .medium, design: .rounded))
-                            }.task { self.showDetails = true }
+                            }.task { self.addHours = true }
                         }
                     }
                 })
-        }.padding()
-            .padding(.top, -40)
-            .alert("Date in the future!", isPresented: $dateError, actions: { Text("") })
-            .sheet(isPresented: $showDetails, content: {
-                AddHoursView(hours: $hours, minutes: $minutes, date: $date, dateError: $dateError, showDetail: $showDetails, vm: vm, month: month).presentationDetents([.fraction(0.6)], selection: $ddMonthDetents)
+        }.alert("Date in the future!", isPresented: $dateError, actions: { Text("") })
+            .sheet(isPresented: $addHours, content: { 
+                AddHoursView(hours: $hours, minutes: $minutes, date: $date, dateError: $dateError, showDetail: $addHours, vm: vm, month: month)
             })
+            .sheet(isPresented: $showInfo, content: {
+               MonthInfoView(vm: vm, month: month)
+            })
+            .navigationTitle(month.title ?? "")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        withAnimation(Animation.spring()) {
+                            self.showInfo.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "info.circle.fill")
+                            .imageScale(.large)
+                            .foregroundColor(Color.blue)
+                    })
+                })
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        withAnimation(Animation.spring()) {
+                            self.addHours.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                            .foregroundColor(Color.blue)
+                    })
+                })
+        }
     }
 }
 
-//struct HoursView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HoursView(month: MonthEntity.init(context: CoreDataManager.instance.context), vm: HoursViewModel(), ddMonthDetents: <#Binding<PresentationDetent>#>)
-//    }
-//}
+struct HoursView_Previews: PreviewProvider {
+    static var previews: some View {
+        HoursView(month: MonthEntity.init(context: CoreDataManager.instance.context), vm: HoursViewModel())
+    }
+}
