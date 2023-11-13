@@ -10,7 +10,7 @@
 "Add month:" = "Додати місяць:";
 "Month" = "Місяць";
 "Add" = "Додати";
-
+"Add month" = "Додати місяць";
 
 //Hours view
 
@@ -41,3 +41,19 @@
 "Hour salary: " = "Ставка за годину: ";
 "User name" = "Ім'я користувача";
 "Hour salary" = "Ставка за годину";
+
+//Months
+
+"January" = "Січень";
+"February" = "Лютий";
+"March" = "Березень";
+"April" = "Квітень";
+"May" = "Травень";
+"June" = "Черевень";
+"July" = "Липень";
+"August" = "Серпень";
+"September" = "Вересень";
+"October" = "Жовтень";
+"November" = "Листопад";
+"December" = "Грудень";
+"Not selected" = "Не вибрано";

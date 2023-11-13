@@ -32,6 +32,7 @@ struct MonthsView: View {
                                     .font(.caption2)
                                     .foregroundColor(.gray.opacity(0.7))
                                 Text(String(format: "%.2f", vm.hoursCounter(month: month)))
+                                    .frame(width: 70)
                             }
                         })
                     }.onDelete(perform: vm.deleteMonth)
@@ -48,12 +49,13 @@ struct MonthsView: View {
                     }
                 }
             })
-            .sheet(isPresented: $addMonth, content: { AddMonths(vm: vm).presentationDetents([.fraction(0.2)], selection: $addMonthDetents)})
+            .sheet(isPresented: $addMonth, content: { AddMonths(vm: vm).presentationDetents([.fraction(0.5)], selection: $addMonthDetents)})
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         withAnimation(Animation.spring()) {
                             self.addMonth.toggle()
+                            HapticFeadback.instance.makeClik(feadbak: .soft)
                         }
                     }, label: {
                         Image(systemName: "plus.circle.fill")
@@ -75,21 +77,27 @@ struct MonthsView_Previews: PreviewProvider {
 struct AddMonths: View {
     
     @ObservedObject var vm: HoursViewModel
-    @State private var textFieldText: String = ""
+    @State private var startonth: Monthes = .empty
     @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
-            Text("Add month:")
-                .font(.title3)
+            Image(systemName: "calendar.badge.plus")
+                .font(.system(size: 65))
+                .foregroundStyle(Color.accentColor)
+            Text("Add month")
+                .padding()
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
             HStack {
-                TextField("Month", text: $textFieldText)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.4))
-                    .cornerRadius(10)
+                Picker("Months", selection: $startonth, content: {
+                    ForEach(Monthes.allCases) { month in
+                        Text(month.description)
+                    }
+                }).pickerStyle(.wheel)
                 Button(action: {
-                    vm.addMonth(title: textFieldText)
+                    vm.addMonth(title: startonth.description)
                     dismiss()
+                    HapticFeadback.instance.success(feadback: .success)
                 }, label: {
                     HStack {
                         Text("Add")
@@ -98,10 +106,10 @@ struct AddMonths: View {
                             .foregroundColor(.white)
                     }.padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.blue)
+                        .background(startonth == .empty ? Color.accentColor.opacity(0.5) : Color.accentColor)
                         .cornerRadius(10)
-                })
+                }).disabled(startonth == .empty)
             }.padding()
-        }
+        }.padding(15)
     }
 }

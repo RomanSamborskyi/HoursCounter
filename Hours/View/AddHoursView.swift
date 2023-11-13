@@ -14,10 +14,10 @@ struct AddHoursView: View {
     @State private var endHours: Hours = .zero
     @State private var endMinutes: Minutes = .zero
     @State private var pauseTime: Pause = .zero
+    @Binding var dateError: Bool
     @Binding var hours: String
     @Binding var minutes: String
     @Binding var date: Date
-    @Binding var dateError: Bool
     @Binding var showDetail: Bool
     @ObservedObject var vm: HoursViewModel
     let month: MonthEntity
@@ -26,7 +26,7 @@ struct AddHoursView: View {
         VStack {
             Image(systemName: "box.truck.badge.clock.fill")
                 .font(.system(size: 65))
-                .foregroundStyle(Color.blue)
+                .foregroundStyle(Color.accentColor)
             Text("Set working hours:")
                 .padding()
                 .font(.system(size: 30, weight: .bold, design: .rounded))
@@ -104,7 +104,9 @@ struct AddHoursView: View {
                         showDetail = false
                     } else {
                         self.dateError = true
+                        HapticFeadback.instance.success(feadback: .error)
                     }
+                    HapticFeadback.instance.success(feadback: .success)
                 }
             }, label: {
                 HStack {
@@ -115,7 +117,7 @@ struct AddHoursView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
-                    .background(startHours == .zero || date >= Date() ? Color.blue.opacity(0.5) : Color.blue)
+                    .background(startHours == .zero || date >= Date() ? Color.accentColor.opacity(0.5) : Color.accentColor)
                     .cornerRadius(10)
             })
             .disabled(startHours == .zero)

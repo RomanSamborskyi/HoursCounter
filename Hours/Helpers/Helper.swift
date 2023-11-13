@@ -139,3 +139,41 @@ enum Pause: String, CaseIterable, Identifiable {
         }
     }
 }
+
+enum Monthes: String, CaseIterable, Identifiable {
+    
+    var id: Self { self }
+    
+    case empty, january, february, march, april, may, june, luly, august, september, october, november, december
+    
+    var description: String {
+        switch self {
+        case .empty:
+           NSLocalizedString("Not selected", comment: "")
+        case .january:
+            NSLocalizedString("January", comment: "")
+        case .february:
+            NSLocalizedString("February", comment: "")
+        case .march:
+            NSLocalizedString("March", comment: "")
+        case .april:
+            NSLocalizedString("April", comment: "")
+        case .may:
+            NSLocalizedString("May", comment: "")
+        case .june:
+            NSLocalizedString("June", comment: "")
+        case .luly:
+            NSLocalizedString("July", comment: "")
+        case .august:
+            NSLocalizedString("August", comment: "")
+        case .september:
+            NSLocalizedString("September", comment: "")
+        case .october:
+            NSLocalizedString("October", comment: "")
+        case .november:
+            NSLocalizedString("November", comment: "")
+        case .december:
+            NSLocalizedString("December", comment: "")
+        }
+    }
+}

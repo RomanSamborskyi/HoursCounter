@@ -19,13 +19,19 @@ struct HoursView: View {
     @State private var hours: String = ""
     @State private var minutes: String = ""
     @State private var addHours: Bool = false
-    @State private var showInfo: Bool = false
     @State private var dateError: Bool = false
     @State private var date: Date = Date()
     
     var body: some View {
         VStack(alignment: .leading) {
             List {
+                if let array = month.hours?.allObjects as? [HoursEntity] {
+                    if !array.isEmpty {
+                        Section {
+                            MonthDetailView(vm: vm, month: month)
+                        }
+                    }
+                }
                 ForEach(vm.getHours(month: month)){ hours in
                     HStack{
                         Text(dateFormater.string(from: hours.date ?? Date()))
@@ -38,50 +44,37 @@ struct HoursView: View {
                     }
                 }
             }.overlay(alignment: .center, content: {
-                    if let array = month.hours?.allObjects as? [HoursEntity] {
-                        if array.isEmpty {
-                            VStack {
-                                Image(systemName: "list.bullet")
-                                    .padding()
-                                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                                Text("The list is empty")
-                                    .padding()
-                                    .font(.system(size: 30, weight: .medium, design: .rounded))
-                            }.task { self.addHours = true }
-                        }
+                if let array = month.hours?.allObjects as? [HoursEntity] {
+                    if array.isEmpty {
+                        VStack {
+                            Image(systemName: "list.bullet")
+                                .padding()
+                                .font(.system(size: 30, weight: .bold, design: .rounded))
+                            Text("The list is empty")
+                                .padding()
+                                .font(.system(size: 30, weight: .medium, design: .rounded))
+                        }.task { self.addHours = false }
                     }
-                })
-        }.alert("Date in the future!", isPresented: $dateError, actions: { Text("") })
-            .sheet(isPresented: $addHours, content: { 
-                AddHoursView(hours: $hours, minutes: $minutes, date: $date, dateError: $dateError, showDetail: $addHours, vm: vm, month: month)
+                }
             })
-            .sheet(isPresented: $showInfo, content: {
-               MonthInfoView(vm: vm, month: month)
+        }.sheet(isPresented: $addHours, content: {
+            AddHoursView(dateError: $dateError, hours: $hours, minutes: $minutes, date: $date, showDetail: $addHours, vm: vm, month: month)
+                .alert("Date in the future!", isPresented: $dateError, actions: {  })
+        })
+        .navigationTitle(month.title ?? "")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button(action: {
+                    withAnimation(Animation.spring()) {
+                        HapticFeadback.instance.makeClik(feadbak: .soft)
+                        self.addHours.toggle()
+                    }
+                }, label: {
+                    Image(systemName: "plus.circle.fill")
+                        .imageScale(.large)
+                        .foregroundColor(Color.accentColor)
+                })
             })
-            .navigationTitle(month.title ?? "")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing, content: {
-                    Button(action: {
-                        withAnimation(Animation.spring()) {
-                            self.showInfo.toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "info.circle.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.blue)
-                    })
-                })
-                ToolbarItem(placement: .navigationBarTrailing, content: {
-                    Button(action: {
-                        withAnimation(Animation.spring()) {
-                            self.addHours.toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "plus.circle.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.blue)
-                    })
-                })
         }
     }
 }
