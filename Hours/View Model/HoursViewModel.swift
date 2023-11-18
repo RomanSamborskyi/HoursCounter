@@ -122,6 +122,7 @@ class HoursViewModel: ObservableObject {
         let rightSide = total - Double(leftSide)
         var finalMinutes: String = ""
         
+        //MARK: Add another cases 
         switch rightSide {
         case 0.25:
             finalMinutes = "15"
