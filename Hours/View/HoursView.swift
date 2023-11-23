@@ -37,6 +37,14 @@ struct HoursView: View {
                        HStack{
                            Text(dateFormater.string(from: hours.date ?? Date()))
                            Spacer()
+                           if hours.note != nil && hours.note != "" {
+                               Text("note")
+                                   .padding(5)
+                                   .font(.caption2)
+                                   .background(Color.accentColor.opacity(0.4))
+                                   .clipShape(RoundedRectangle(cornerRadius: 5))
+                           }
+                           Spacer()
                            Text("\(hours.hours).\(hours.minutes)")
                        }
                    }).contextMenu {
