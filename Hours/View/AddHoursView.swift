@@ -92,7 +92,7 @@ struct AddHoursView: View {
                 withAnimation(Animation.spring()) {
                     if !(date > Date()) {
                         vm.countWorkHours(starHours: startHours.description, startMinutes: startMinutes.description, endHours: endHours.description, endMinutes: endMinutes.description, pause: pauseTime.description, hours: &hours, minutes: &minutes)
-                        vm.addHours(hours: Int64(hours) ?? 0, minutes: Int64(minutes) ?? 0, date: date, month: month)
+                        vm.addHours(hours: Int64(hours) ?? 0, minutes: Int64(minutes) ?? 0, date: date, month: month, startHours: Int64(startHours.description) ?? 0, startMinutes: Int64(startMinutes.description) ?? 0, endHours: Int64(endHours.description) ?? 0, endMinutes: Int64(endMinutes.description) ?? 0, pauseTime: Int64(pauseTime.description) ?? 0)
                         hours = ""
                         minutes = ""
                         startHours = .zero

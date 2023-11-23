@@ -33,16 +33,6 @@ class HoursViewModel: ObservableObject {
         }
     }
     
-    func getStartEndHours(hours: HoursEntity) {
-        let request = NSFetchRequest<StartEndHoursEntity>(entityName: coreData.startEndhoursEntityName)
-        request.predicate = NSPredicate(format: "hours == %@", hours)
-        
-        do {
-           try coreData.context.fetch(request)
-        } catch {
-            print("Error of fetching start hours: \(error)")
-        }
-    }
     
     func salaryCounter(month: MonthEntity) -> Double {
         let hours = getHours(month: month)
@@ -87,12 +77,17 @@ class HoursViewModel: ObservableObject {
         save()
     }
     
-    func addHours(hours: Int64, minutes: Int64, date: Date, month: MonthEntity) {
+    func addHours(hours: Int64, minutes: Int64, date: Date, month: MonthEntity,startHours: Int64, startMinutes: Int64, endHours: Int64, endMinutes: Int64, pauseTime: Int64) {
         let newData = HoursEntity(context: coreData.context)
         newData.hours = hours
         newData.minutes = minutes
         newData.date = date
         newData.month = month
+        newData.startHours = startHours
+        newData.startMinutes = startMinutes
+        newData.endHours = endHours
+        newData.endMinutes = endMinutes
+        newData.pauseTime = pauseTime
         save()
     }
     
