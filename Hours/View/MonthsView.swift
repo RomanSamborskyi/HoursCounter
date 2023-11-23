@@ -79,6 +79,12 @@ struct AddMonths: View {
     @ObservedObject var vm: HoursViewModel
     @State private var startonth: Monthes = .empty
     @Environment(\.dismiss) var dismiss
+    var dateFormater: DateFormatter {
+        let formater = DateFormatter()
+        formater.dateStyle = .medium
+        formater.dateFormat = "YYYY"
+        return formater
+    }
     var body: some View {
         VStack {
             Image(systemName: "calendar.badge.plus")
@@ -95,7 +101,7 @@ struct AddMonths: View {
                     }
                 }).pickerStyle(.wheel)
                 Button(action: {
-                    vm.addMonth(title: startonth.description)
+                    vm.addMonth(title: startonth.description + " " + dateFormater.string(from: Date()))
                     dismiss()
                     HapticFeadback.instance.success(feadback: .success)
                 }, label: {
