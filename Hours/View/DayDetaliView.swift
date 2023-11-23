@@ -16,8 +16,10 @@ struct DayDetaliView: View {
         formater.dateStyle = .full
         return formater
     }
+    @State private var text: String = ""
+    
     var body: some View {
-        VStack {
+        ScrollView {
             Image(systemName: "doc.fill.badge.ellipsis")
                 .font(.system(size: 65))
                 .foregroundStyle(Color.accentColor)
@@ -68,27 +70,16 @@ struct DayDetaliView: View {
                 Text("\(hours.hours).\(hours.minutes)")
                     .frame(width: 45)
             }
-            if hours.hours >= 9 {
-                HStack {
-                    Text("Nice work, keep it up")
-                    Image(systemName: "checkmark.seal.fill")
-                } .padding()
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .multilineTextAlignment(.center)
-                    .background(Color.gray.opacity(0.5))
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-            } else {
-                HStack {
-                    Text("You can do better")
-                    Spacer()
-                    Image(systemName: "figure.strengthtraining.traditional")
-                }.padding()
-                    .frame(maxWidth: .infinity)
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .multilineTextAlignment(.center)
-                    .background(Color.gray.opacity(0.5))
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-            }
+            Text("Add some notes:")
+                .padding()
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+           TextEditor(text: $text)
+                .padding()
+                .frame(height: 120)
+                .scrollContentBackground(.hidden)
+                .background(.gray.opacity(0.7))
+                .clipShape(RoundedRectangle(cornerRadius: 15))
             Spacer()
         }.padding(25)
     }
