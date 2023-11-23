@@ -18,7 +18,7 @@ struct DayDetaliView: View {
     }
     var body: some View {
         VStack {
-            Image(systemName: "box.truck.badge.clock.fill")
+            Image(systemName: "doc.fill.badge.ellipsis")
                 .font(.system(size: 65))
                 .foregroundStyle(Color.accentColor)
             Text("Detaile of the day:")
