@@ -25,7 +25,7 @@ struct DayDetaliView: View {
                 .padding()
                 .font(.system(size: 30, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
-            Text(dateFormater.string(from: hours.date ?? Date()))
+            Text(dateFormater.string(from: hours.date ?? Date()).capitalized)
                 .padding(.bottom)
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)

@@ -20,7 +20,7 @@ struct MonthsView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section("Months") {
                     ForEach(vm.months) { month in

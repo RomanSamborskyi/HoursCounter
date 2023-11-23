@@ -17,16 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launch-icon" translatesAutoresizingMaskIntoConstraints="NO" id="cNn-Ir-HFw">
-                                <rect key="frame" x="86" y="204" width="221" height="220"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launch-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Zz3-g2-xiX">
+                                <rect key="frame" x="76" y="184" width="240" height="222"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="684-QI-Mz5">
-                                <rect key="frame" x="30" y="414" width="333" height="156"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBO-9q-6lw">
+                                <rect key="frame" x="30" y="441" width="332" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Orginaze your working hours">
+                                    <fragment content="Organize your working hours">
                                         <attributes>
-                                            <font key="NSFont" size="40" name="TimesNewRomanPSMT"/>
+                                            <font key="NSFont" size="37" name="TimesNewRomanPSMT"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -35,13 +36,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="684-QI-Mz5" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="355" id="OnG-kl-2bw"/>
-                            <constraint firstItem="684-QI-Mz5" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="30" id="f5o-LT-Phv"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="684-QI-Mz5" secondAttribute="trailing" constant="30" id="m7u-Fu-K0C"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="684-QI-Mz5" secondAttribute="bottom" constant="248" id="ywc-T3-45e"/>
-                        </constraints>
+                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -51,8 +46,8 @@
     </scenes>
     <resources>
         <image name="launch-icon" width="512" height="512"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
