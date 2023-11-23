@@ -77,7 +77,7 @@ class HoursViewModel: ObservableObject {
         save()
     }
     
-    func addHours(hours: Int64, minutes: Int64, date: Date, month: MonthEntity,startHours: Int64, startMinutes: Int64, endHours: Int64, endMinutes: Int64, pauseTime: Int64) {
+    func addHours(hours: Int64, minutes: Int64, date: Date, month: MonthEntity,startHours: Int64, startMinutes: Int64, endHours: Int64, endMinutes: Int64, pauseTime: Int64, note: String) {
         let newData = HoursEntity(context: coreData.context)
         newData.hours = hours
         newData.minutes = minutes
@@ -88,6 +88,7 @@ class HoursViewModel: ObservableObject {
         newData.endHours = endHours
         newData.endMinutes = endMinutes
         newData.pauseTime = pauseTime
+        newData.note = note
         save()
     }
     

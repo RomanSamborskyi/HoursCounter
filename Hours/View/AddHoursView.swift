@@ -14,6 +14,7 @@ struct AddHoursView: View {
     @State private var endHours: Hours = .zero
     @State private var endMinutes: Minutes = .zero
     @State private var pauseTime: Pause = .zero
+    @State private var text: String = ""
     @Binding var dateError: Bool
     @Binding var hours: String
     @Binding var minutes: String
@@ -23,7 +24,7 @@ struct AddHoursView: View {
     let month: MonthEntity
     
     var body: some View {
-        VStack {
+        ScrollView {
             Image(systemName: "box.truck.badge.clock.fill")
                 .font(.system(size: 65))
                 .symbolRenderingMode(.multicolor)
@@ -89,11 +90,21 @@ struct AddHoursView: View {
                        Spacer()
                 DatePicker("", selection: $date, displayedComponents: .date)
             }
+            Text("Add some notes:")
+                .padding()
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+            TextEditor(text: $text)
+                 .padding()
+                 .frame(height: 120)
+                 .scrollContentBackground(.hidden)
+                 .background(.gray.opacity(0.7))
+                 .clipShape(RoundedRectangle(cornerRadius: 15))
             Button(action: {
                 withAnimation(Animation.spring()) {
                     if !(date > Date()) {
                         vm.countWorkHours(starHours: startHours.description, startMinutes: startMinutes.description, endHours: endHours.description, endMinutes: endMinutes.description, pause: pauseTime.description, hours: &hours, minutes: &minutes)
-                        vm.addHours(hours: Int64(hours) ?? 0, minutes: Int64(minutes) ?? 0, date: date, month: month, startHours: Int64(startHours.description) ?? 0, startMinutes: Int64(startMinutes.description) ?? 0, endHours: Int64(endHours.description) ?? 0, endMinutes: Int64(endMinutes.description) ?? 0, pauseTime: Int64(pauseTime.description) ?? 0)
+                        vm.addHours(hours: Int64(hours) ?? 0, minutes: Int64(minutes) ?? 0, date: date, month: month, startHours: Int64(startHours.description) ?? 0, startMinutes: Int64(startMinutes.description) ?? 0, endHours: Int64(endHours.description) ?? 0, endMinutes: Int64(endMinutes.description) ?? 0, pauseTime: Int64(pauseTime.description) ?? 0, note: text)
                         hours = ""
                         minutes = ""
                         startHours = .zero

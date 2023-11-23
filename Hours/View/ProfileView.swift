@@ -31,7 +31,7 @@ struct ProfileView: View {
                             }, label: {
                                 Text("Save")
                                     .padding(5)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.accentColor)
                                     .frame(width: 90,height: 30)
                             })
                         }
@@ -47,7 +47,7 @@ struct ProfileView: View {
                             }, label: {
                                 Text("Edit")
                                     .padding(5)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.accentColor)
                                     .frame(width: 75,height: 30)
                             })
                         }
@@ -67,7 +67,7 @@ struct ProfileView: View {
                         }, label: {
                             Text("Save")
                                 .padding(5)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.accentColor)
                                 .frame(width: 90,height: 30)
                         })
                     }
@@ -80,7 +80,7 @@ struct ProfileView: View {
                         }, label: {
                             Text("Edit")
                                 .padding(5)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.accentColor)
                                 .frame(width: 75,height: 30)
                         })
                     }

@@ -16,7 +16,6 @@ struct DayDetaliView: View {
         formater.dateStyle = .full
         return formater
     }
-    @State private var text: String = ""
     
     var body: some View {
         ScrollView {
@@ -70,16 +69,19 @@ struct DayDetaliView: View {
                 Text("\(hours.hours).\(hours.minutes)")
                     .frame(width: 45)
             }
-            Text("Add some notes:")
-                .padding()
-                .font(.system(size: 20, weight: .bold, design: .rounded))
-                .multilineTextAlignment(.center)
-           TextEditor(text: $text)
-                .padding()
-                .frame(height: 120)
-                .scrollContentBackground(.hidden)
-                .background(.gray.opacity(0.7))
-                .clipShape(RoundedRectangle(cornerRadius: 15))
+            if hours.note != nil && hours.note != "" {
+                Text("Day note:")
+                    .padding()
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                Text(hours.note ?? "NO NOTES")
+                    .padding()
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.accentColor.opacity(0.4))
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+            }
             Spacer()
         }.padding(25)
     }
