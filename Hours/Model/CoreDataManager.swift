@@ -19,6 +19,7 @@ class CoreDataManager {
     let containerName: String = "HoursContainer"
     let monthEntityName: String = "MonthEntity"
     let hoursEntityName: String = "HoursEntity"
+    let startEndhoursEntityName: String = "StartEndHoursEntity"
     
     init() {
         

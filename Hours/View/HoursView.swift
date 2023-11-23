@@ -33,11 +33,13 @@ struct HoursView: View {
                     }
                 }
                 ForEach(vm.getHours(month: month)){ hours in
-                    HStack{
-                        Text(dateFormater.string(from: hours.date ?? Date()))
-                        Spacer()
-                        Text("\(hours.hours).\(hours.minutes)")
-                    }.contextMenu {
+                   NavigationLink(destination: { DayDetaliView(vm: vm, hours: hours) }, label: {
+                       HStack{
+                           Text(dateFormater.string(from: hours.date ?? Date()))
+                           Spacer()
+                           Text("\(hours.hours).\(hours.minutes)")
+                       }
+                   }).contextMenu {
                         Button(role: .destructive, action: { vm.deleteHours(month: month, hour: hours) }, label: {
                             Label("Delete", systemImage: "trash")
                         })

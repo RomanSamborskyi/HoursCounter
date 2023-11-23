@@ -22,6 +22,8 @@
 		6BD85E7C2AEAD59300DD5DF5 /* AddHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD85E7B2AEAD59300DD5DF5 /* AddHoursView.swift */; };
 		6BD85E802AEADB1C00DD5DF5 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD85E7F2AEADB1C00DD5DF5 /* Helper.swift */; };
 		6BE5F3BC2AA346C000CD6A14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE5F3BE2AA346C000CD6A14 /* Localizable.strings */; };
+		6BF526482B0F7F150065FEAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BF526472B0F7F150065FEAA /* LaunchScreen.storyboard */; };
+		6BF5264A2B0F8FBD0065FEAA /* DayDetaliView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF526492B0F8FBD0065FEAA /* DayDetaliView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		6BD85E7F2AEADB1C00DD5DF5 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		6BE5F3BD2AA346C000CD6A14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BE5F3BF2AA346C500CD6A14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6BF526472B0F7F150065FEAA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Hours/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		6BF526492B0F8FBD0065FEAA /* DayDetaliView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetaliView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 				6B36A2ED2A8D06AC0016EC83 /* Model */,
 				6B58047C2AFF903C003A5693 /* Helpers */,
 				6B36A2E32A8D06910016EC83 /* Assets.xcassets */,
+				6BF526472B0F7F150065FEAA /* LaunchScreen.storyboard */,
 				6B36A2E52A8D06910016EC83 /* Preview Content */,
 			);
 			path = Hours;
@@ -118,6 +123,7 @@
 				6B36A2E12A8D068F0016EC83 /* ContentView.swift */,
 				6B36A2F72A8D12AA0016EC83 /* MonthsView.swift */,
 				6B36A2FB2A8D1E110016EC83 /* HoursView.swift */,
+				6BF526492B0F8FBD0065FEAA /* DayDetaliView.swift */,
 				6B36A2F92A8D14D00016EC83 /* ProfileView.swift */,
 				6B5804782AFEBFAC003A5693 /* MonthDetailView.swift */,
 				6BD85E7B2AEAD59300DD5DF5 /* AddHoursView.swift */,
@@ -193,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B36A2E72A8D06910016EC83 /* Preview Assets.xcassets in Resources */,
+				6BF526482B0F7F150065FEAA /* LaunchScreen.storyboard in Resources */,
 				6BE5F3BC2AA346C000CD6A14 /* Localizable.strings in Resources */,
 				6B36A2E42A8D06910016EC83 /* Assets.xcassets in Resources */,
 			);
@@ -215,6 +222,7 @@
 				6BD85E7C2AEAD59300DD5DF5 /* AddHoursView.swift in Sources */,
 				6B36A2F42A8D07B30016EC83 /* CoreDataManager.swift in Sources */,
 				6B36A2FA2A8D14D00016EC83 /* ProfileView.swift in Sources */,
+				6BF5264A2B0F8FBD0065FEAA /* DayDetaliView.swift in Sources */,
 				6B36A2FC2A8D1E110016EC83 /* HoursView.swift in Sources */,
 				6B36A2E02A8D068F0016EC83 /* HoursApp.swift in Sources */,
 			);
@@ -362,7 +370,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -392,7 +400,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
