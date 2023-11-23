@@ -68,7 +68,22 @@ struct DayDetaliView: View {
                     Text("\(hours.hours).\(hours.minutes)")
                         .frame(width: 45)
                 }
-           
+            if hours.hours >= 9 {
+                Text("Nice work, keep it up")
+                    .padding()
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .background(Color.gray.opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                Image(systemName: "")
+            } else {
+                Text("You can do better")
+                    .padding()
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .background(Color.gray.opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+            }
           Spacer()
         }.padding(25)
     }

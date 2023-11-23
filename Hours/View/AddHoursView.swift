@@ -26,6 +26,7 @@ struct AddHoursView: View {
         VStack {
             Image(systemName: "box.truck.badge.clock.fill")
                 .font(.system(size: 65))
+                .symbolRenderingMode(.multicolor)
                 .foregroundStyle(Color.accentColor)
             Text("Set working hours:")
                 .padding()

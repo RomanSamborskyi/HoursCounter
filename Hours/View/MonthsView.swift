@@ -27,6 +27,8 @@ struct MonthsView: View {
                         NavigationLink(destination: { HoursView(month: month, vm: vm) }, label: {
                             HStack(spacing:15) {
                                 Text(month.title ?? "NO TITLE")
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
                                 Spacer()
                                 Text("total hours:")
                                     .font(.caption2)
